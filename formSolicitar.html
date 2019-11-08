@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/styleSolicitar.css">
+  <!--  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <title>Registra tu empresa</title>
+</head>
+<body>
+	    	<h3>Elige tu destino</h3>
+
+    <div class="loginBox">
+        <img class="user" src="images/taxi.png" style="max-height:280px;">
+        <form class="form-validate">
+				<div class="opciones">
+					<div class="opcion">
+						<div class="inputBox">
+							<input type="text" id="from" name="from" value="" placeholder="Desde..." class="ajaxField"><span class="fa fa-map-marker"></span>
+						</div>
+					</div>
+					<div class="opcion">
+						<div class="inputBox">
+							<input type="text" id="to" name="to" value="" placeholder="A" class="ajaxField"><span class="fa fa-map-marker"></span>
+						</div>
+					</div>
+					<div class="opcion">
+						<div class="form-group">
+							<input type="text" id="phone" name="phone" value="" placeholder="Numero de Celular" class="ajaxField required"><span class="fa fa-phone"></span>
+						</div>
+					</div>
+					<div class="opcion">
+						<div class="form-group">
+							<input type="datetime-local" id="text" name="text" value="" placeholder="Fecha" class="ajaxField"><span class="fa fa-calendar"></span>
+						</div>
+					</div>
+				</div>
+        <div ><center>
+				<input type="submit" value="Aceptar" class="btn btn-lg btn-red aligncenter">
+				<input type="hidden" id="type" name="type" value="2" class="ajaxField">
+<center>
+      </div>
+			</form>
+    </div>
+</body>
+</html>

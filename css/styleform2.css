@@ -1,0 +1,133 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    background:url("bg.jpg");
+    font-family: verdana;
+    background-color: rgba(0, 0,0);
+}
+
+.tabclientes
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1080px;
+    min-height: 200px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    box-sizing: border-box
+
+
+
+
+}
+.clientestable{
+    width: 90%;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid #333;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-collapse: collapse;
+}
+.user {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+th{
+ background-color:rgb(226, 146, 10);
+ font-family: 'Poppins', sans-serif;
+ border: 1px solid #666;
+ text-align: center;
+ color: black;
+}
+td{
+    border: 1px solid #666;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: black;
+}
+tr:nth-child(even){
+    background-color:rgb(167, 167, 167) ;
+}
+
+
+
+h3 {
+    margin: 0;
+    padding: 0 0 20px;
+    color: #262626;
+    text-align: center;
+}
+
+.loginBox input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"]
+{
+    border: none;
+    border-bottom:2px solid #262626;
+    outline: none;
+    height: 40px;
+    color: #262626;
+    background: transparent;
+    font-size: 16px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.loginBox input[type="text"]:focus,
+.loginBox input[type="password"]:focus
+{
+    border-bottom: 2px solid #f00
+}
+
+.inputBox
+{
+    position: relative;
+
+
+}
+
+.inputBox span
+{
+    position: absolute;
+    top: 10px;
+    color: #262626
+}
+
+.loginBox input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    background: #ffab00;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.loginBox a
+{
+    color: #262626;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+
+}
