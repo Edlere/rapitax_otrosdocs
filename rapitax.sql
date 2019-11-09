@@ -33,46 +33,37 @@ CREATE TABLE IF NOT EXISTS `choferes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `brevete` varchar(20) NOT NULL,
   `DNI` varchar(8) NOT NULL,
-  `nombres` varchar(50) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
-  `categoria` varchar(20) NOT NULL,
+  `nombres` varchar(100) NOT NULL,
+  `apellidos` varchar(100) NOT NULL,
+  `categoria` varchar(40) NOT NULL,
   `fechanac` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `choferes_vehiculos`
---
-
-DROP TABLE IF EXISTS `choferes_vehiculos`;
-CREATE TABLE IF NOT EXISTS `choferes_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `chofer_id` int(11) NOT NULL,
-  `vehiculo_id` int(11) NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_chof` (`chofer_id`),
-  KEY `fk_vehi` (`vehiculo_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
--- Table structure for table `choferes_vehiculos_clientes`
+-- Table structure for table `servicios`
 --
 
-DROP TABLE IF EXISTS `choferes_vehiculos_clientes`;
-CREATE TABLE IF NOT EXISTS `choferes_vehiculos_clientes` (
+DROP TABLE IF EXISTS `servicios`;
+CREATE TABLE IF NOT EXISTS `servicios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente_id` int(11) NOT NULL,
-  `fecha` datetime NOT NULL,
-  `chofer_vehiculo_id` int(11) NOT NULL,
+  `chofere_id` int(11) NOT NULL,
+  `vehiculo_id` int(11) NOT NULL,
+  `tiposervicio_id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `origen` varchar(150) NOT NULL,
+  `destinoref` varchar(150) NOT NULL,
+  `destinoreal` varchar(150) NOT NULL,
   `precio` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_chofer_vehi` (`chofer_vehiculo_id`),
-  KEY `fk_cliente` (`cliente_id`)
+  KEY `fk_cliente` (`cliente_id`),
+  KEY `fk_chofere` (`chofere_id`),
+  KEY `fk_vehiculo` (`vehiculo_id`),
+  KEY `fk_tiposervicio` (`tiposervicio_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,49 +75,18 @@ CREATE TABLE IF NOT EXISTS `choferes_vehiculos_clientes` (
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecharegistro` datetime NOT NULL,
-  `estado` char(1) NOT NULL,
-  `categoria` varchar(15) NOT NULL,
-  `juridica_id` int(11) NOT NULL,
-  `natural_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_cliente_natural` (`natural_id`),
-  KEY `fk_cliente_juridica` (`juridica_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `juridicas`
---
-
-DROP TABLE IF EXISTS `juridicas`;
-CREATE TABLE IF NOT EXISTS `juridicas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ruc` varchar(11) NOT NULL,
-  `razsoc` varchar(100) NOT NULL,
-  `direccion` varchar(100) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
+  `fecharegistro` date NOT NULL,
+  `categoria` varchar(40) NOT NULL,
+  `DNI` varchar(8) NULL,
+  `nombres` varchar(100) NULL,
+  `apellidos` varchar(100) NULL,
+  `sexo` char(1) NULL,
+  `razsoc` varchar(200) NULL,
+  `direccion` varchar(200) NULL,
+  `descripcion` varchar(200) NULL,
   `telefono` varchar(9) NOT NULL,
-  `correo` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `naturales`
---
-
-DROP TABLE IF EXISTS `naturales`;
-CREATE TABLE IF NOT EXISTS `naturales` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `DNI` varchar(8) NOT NULL,
-  `nombres` varchar(50) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
-  `sexo` char(1) NOT NULL,
-  `telefono` varchar(9) NOT NULL,
-  `correo` varchar(20) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `estado` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -139,26 +99,22 @@ CREATE TABLE IF NOT EXISTS `naturales` (
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(20) NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
+  `tipo` varchar(40) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutas`
+-- Table structure for table `tiposervicios`
 --
 
-DROP TABLE IF EXISTS `rutas`;
-CREATE TABLE IF NOT EXISTS `rutas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `origen` varchar(20) NOT NULL,
-  `destinoref` varchar(20) NOT NULL,
-  `destinoreal` varchar(20) NOT NULL,
-  `chofer_vehiculo_cliente_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_ruta_cliente` (`chofer_vehiculo_cliente_id`)
+DROP TABLE IF EXISTS `tiposervicios`;
+CREATE TABLE IF NOT EXISTS `tiposervicios` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -188,10 +144,10 @@ DROP TABLE IF EXISTS `vehiculos`;
 CREATE TABLE IF NOT EXISTS `vehiculos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `placa` varchar(8) NOT NULL,
-  `modelo` varchar(20) NOT NULL,
-  `marca` varchar(20) NOT NULL,
+  `modelo` varchar(50) NOT NULL,
+  `marca` varchar(50) NOT NULL,
   `año` year(4) NOT NULL,
-  `estado` char(1) NOT NULL,
+  `estado` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -200,31 +156,13 @@ CREATE TABLE IF NOT EXISTS `vehiculos` (
 --
 
 --
--- Constraints for table `choferes_vehiculos`
+-- Constraints for table `servicios`
 --
-ALTER TABLE `choferes_vehiculos`
-  ADD CONSTRAINT `fk_chof` FOREIGN KEY (`chofer_id`) REFERENCES `choferes` (`id`),
-  ADD CONSTRAINT `fk_vehi` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos` (`id`);
-
---
--- Constraints for table `choferes_vehiculos_clientes`
---
-ALTER TABLE `choferes_vehiculos_clientes`
-  ADD CONSTRAINT `fk_chofer_vehi` FOREIGN KEY (`chofer_vehiculo_id`) REFERENCES `choferes_vehiculos` (`id`),
-  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`);
-
---
--- Constraints for table `clientes`
---
-ALTER TABLE `clientes`
-  ADD CONSTRAINT `fk_cliente_juridica` FOREIGN KEY (`juridica_id`) REFERENCES `juridicas` (`id`),
-  ADD CONSTRAINT `fk_cliente_natural` FOREIGN KEY (`natural_id`) REFERENCES `naturales` (`id`);
-
---
--- Constraints for table `rutas`
---
-ALTER TABLE `rutas`
-  ADD CONSTRAINT `fk_ruta_cliente` FOREIGN KEY (`chofer_vehiculo_cliente_id`) REFERENCES `choferes_vehiculos_clientes` (`id`);
+ALTER TABLE `servicios`
+  ADD CONSTRAINT `fk_chofere` FOREIGN KEY (`chofere_id`) REFERENCES `choferes` (`id`),
+  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
+  ADD CONSTRAINT `fk_vehiculo` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos` (`id`),
+  ADD CONSTRAINT `fk_tiposervicio` FOREIGN KEY (`tiposervicio_id`) REFERENCES `tiposervicios` (`id`);
 
 --
 -- Constraints for table `usuarios`
