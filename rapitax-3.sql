@@ -35,19 +35,21 @@ CREATE TABLE `choferes` (
   `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
   `categoria` varchar(40) NOT NULL,
-  `fechanac` date NOT NULL
+  `fechanac` date NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `choferes`
 --
 
-INSERT INTO `choferes` (`id`, `brevete`, `DNI`, `nombres`, `apellidos`, `categoria`, `fechanac`) VALUES
-(1, 'Q238759', '46582345', 'Juan Jesus', 'Palomares Vega', 'A-II', '1976-11-14'),
-(2, 'Q762598', '76283839', 'Miguel Angel', 'Mendoza Castañeda', 'A-III', '1970-02-11'),
-(3, 'E537939', '32449732', 'Rodrigo Said', 'Flores Garcías', 'A-II', '1980-01-04'),
-(4, 'R432122', '32467784', 'Alexander Agustin', 'Alegre Suarez', 'A-III', '1981-12-12'),
-(5, 'E276421', '72544909', 'Aldo Alberto', 'Quispe Lopez', 'A-II', '1983-08-23');
+INSERT INTO `choferes` (`id`, `brevete`, `DNI`, `nombres`, `apellidos`, `categoria`, `fechanac`, `created`) VALUES
+(1, 'Q238759', '46582345', 'Juan Jesus', 'Palomares Vega', 'A-II', '1976-11-14', 'NOW()'),
+(2, 'Q762598', '76283839', 'Miguel Angel', 'Mendoza Castañeda', 'A-III', '1970-02-11', 'NOW()'),
+(3, 'E537939', '32449732', 'Rodrigo Said', 'Flores Garcías', 'A-II', '1980-01-04', 'NOW()'),
+(4, 'R432122', '32467784', 'Alexander Agustin', 'Alegre Suarez', 'A-III', '1981-12-12', 'NOW()'),
+(5, 'E276421', '72544909', 'Aldo Alberto', 'Quispe Lopez', 'A-II', '1983-08-23', 'NOW()');
 
 -- --------------------------------------------------------
 
@@ -69,41 +71,23 @@ CREATE TABLE `clientes` (
   `direccion` varchar(200) DEFAULT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `telefono` varchar(9) NOT NULL,
-  `estado` varchar(40) NOT NULL
+  `estado` varchar(40) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `DNI`, `correo`, `ruc`, `fecharegistro`, `categoria`, `nombres`, `apellidos`, `sexo`, `razsoc`, `direccion`, `descripcion`, `telefono`, `estado`) VALUES
-(1, '32875643', 'dnilson_34@gmail.com', NULL, '2019-11-01', 'VIP', 'Denilson Arturo', 'Milla Cadillo', 'M', NULL, NULL, NULL, '987705643', 'Activo'),
-(2, '30567843', 'avilacladeron@hotmail.com', NULL, '2019-11-04', 'Premium', 'Sandra Mireya ', 'Avila Calderon', 'F', NULL, NULL, NULL, '977654569', 'Activo'),
-(3, '32764532', 'amarilis345@gmail.com', NULL, '2019-10-03', 'Standar', 'Nataly Amarilis', 'García Quispe', 'F', NULL, NULL, NULL, '99067536', 'Activo'),
-(4, NULL, 'vitale_dex@gmail.com', '20531876416', '2019-11-01', 'VIP', NULL, NULL, NULL, 'Vitale Dex S.A.C.', 'Prolong. Leoncio Prado Nro. 1459 P.J. Miramar Alto', 'Vta. Min. en Almacenes No Especializ.', '043345730', 'Activo');
+INSERT INTO `clientes` (`id`, `DNI`, `correo`, `ruc`, `fecharegistro`, `categoria`, `nombres`, `apellidos`, `sexo`, `razsoc`, `direccion`, `descripcion`, `telefono`, `estado`, `created`) VALUES
+(1, '32875643', 'dnilson_34@gmail.com', NULL, '2019-11-01', 'VIP', 'Denilson Arturo', 'Milla Cadillo', 'M', NULL, NULL, NULL, '987705643', 'Activo', 'NOW()'),
+(2, '30567843', 'avilacladeron@hotmail.com', NULL, '2019-11-04', 'Premium', 'Sandra Mireya ', 'Avila Calderon', 'F', NULL, NULL, NULL, '977654569', 'Activo', 'NOW()'),
+(3, '32764532', 'amarilis345@gmail.com', NULL, '2019-10-03', 'Standar', 'Nataly Amarilis', 'García Quispe', 'F', NULL, NULL, NULL, '99067536', 'Activo', 'NOW()'),
+(4, NULL, 'vitale_dex@gmail.com', '20531876416', '2019-11-01', 'VIP', NULL, NULL, NULL, 'Vitale Dex S.A.C.', 'Prolong. Leoncio Prado Nro. 1459 P.J. Miramar Alto', 'Vta. Min. en Almacenes No Especializ.', '043345730', 'Activo', 'NOW()');
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
-  `tipo` varchar(40) NOT NULL,
-  `descripcion` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `roles`
---
-
-INSERT INTO `roles` (`id`, `tipo`, `descripcion`) VALUES
-(1, 'Admin', 'Administra sistema'),
-(2, 'Employee', 'Maneja sistema'),
-(3, 'Client', 'Solicita servicio');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `servicios`
@@ -119,17 +103,19 @@ CREATE TABLE `servicios` (
   `origen` varchar(150) NOT NULL,
   `destinoref` varchar(150) NOT NULL,
   `destinoreal` varchar(150) NOT NULL,
-  `precio` decimal(10,0) DEFAULT NULL
+  `precio` decimal(10,0) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id`, `cliente_id`, `chofere_id`, `vehiculo_id`, `tiposervicio_id`, `fecha`, `origen`, `destinoref`, `destinoreal`, `precio`) VALUES
-(1, 1, 1, 3, 1, '2019-11-07 20:04:56', 'Av. Meiggs 400', 'Plaza Mayor', 'Av. Pacífico 370\'', '10'),
-(2, 3, 3, 4, 2, '2019-11-06 00:00:00', 'Av. Anchoveta 450', 'Mercado Buenos Aires', 'Av. Pacífico 120\'', '4'),
-(3, 2, 2, 5, 2, '2019-11-07 00:00:00', 'Av. Industrial 129', 'Plaza de Armas', 'Av. Pardo 354\'', '4');
+INSERT INTO `servicios` (`id`, `cliente_id`, `chofere_id`, `vehiculo_id`, `tiposervicio_id`, `fecha`, `origen`, `destinoref`, `destinoreal`, `precio`, `created`) VALUES
+(1, 1, 1, 3, 1, '2019-11-07 20:04:56', 'Av. Meiggs 400', 'Plaza Mayor', 'Av. Pacífico 370\'', '10', 'NOW()'),
+(2, 3, 3, 4, 2, '2019-11-06 00:00:00', 'Av. Anchoveta 450', 'Mercado Buenos Aires', 'Av. Pacífico 120\'', '4', 'NOW()'),
+(3, 2, 2, 5, 2, '2019-11-07 00:00:00', 'Av. Industrial 129', 'Plaza de Armas', 'Av. Pardo 354\'', '4', 'NOW()');
 
 -- --------------------------------------------------------
 
@@ -139,17 +125,19 @@ INSERT INTO `servicios` (`id`, `cliente_id`, `chofere_id`, `vehiculo_id`, `tipos
 
 CREATE TABLE `tiposervicios` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(100) NOT NULL
+  `descripcion` varchar(100) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tiposervicios`
 --
 
-INSERT INTO `tiposervicios` (`id`, `descripcion`) VALUES
-(1, 'TAXI VIP'),
-(2, 'TAXI DIRECTO'),
-(3, 'TAXI CORPORATIVO');
+INSERT INTO `tiposervicios` (`id`, `descripcion`,`created`) VALUES
+(1, 'TAXI VIP', 'NOW()'),
+(2, 'TAXI DIRECTO', 'NOW()'),
+(3, 'TAXI CORPORATIVO', 'NOW()');
 
 -- --------------------------------------------------------
 
@@ -159,27 +147,20 @@ INSERT INTO `tiposervicios` (`id`, `descripcion`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `cod` char(5) NOT NULL,
-  `cliente_id` int(8) DEFAULT NULL,
-  `rol_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `cod`, `cliente_id`, `rol_id`, `username`, `email`, `password`, `status`) VALUES
-(1, 'U-001', NULL, 1, 'admin', 'admin@gmail.com', 'admin', 'Activo'),
-(2, 'U-002', NULL, 2, 'colaborado1', 'empleado1@gmail.com', 'colaborador1', 'Activo'),
-(3, 'U-003', NULL, 2, 'colaborador2', 'empleado2@gmail.com', 'colaborador2', 'Activo'),
-(4, 'U-004', 1, 3, 'cliente1', 'cliente1@gmail.com', 'cliente1', 'Activo'),
-(5, 'U-005', 2, 3, 'cliente2', 'cliente2@gmail.com', 'cliente2', 'Activo'),
-(6, 'U-006', 3, 3, 'cliente3', 'cliente3@gmail.com', 'cliente3', 'Activo'),
-(7, 'U-007', 4, 3, 'cliente4', 'cliente4@gmail.com', 'cliente4', 'Activo');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin', 'NOW()'),
+(2, 'colaborador', 'colab@gmail.com', 'colaborador', 'NOW()');
 
 -- --------------------------------------------------------
 
@@ -193,19 +174,21 @@ CREATE TABLE `vehiculos` (
   `modelo` varchar(50) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `año` year(4) NOT NULL,
-  `estado` varchar(20) NOT NULL
+  `estado` varchar(20) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `vehiculos`
 --
 
-INSERT INTO `vehiculos` (`id`, `placa`, `modelo`, `marca`, `año`, `estado`) VALUES
-(1, 'A1A-455', 'I10 ', 'Hyundai', 2013, 'Activo'),
-(2, 'H1A-664', 'I10 ', 'Hyundai', 2013, 'Activo'),
-(3, 'H1E-215', 'I10 ', 'Hyundai', 2013, 'Activo'),
-(4, 'W1B-845', 'I10 ', 'Hyundai', 2013, 'Activo'),
-(5, 'G1A-104', 'I10 ', 'Hyundai', 2013, 'Activo');
+INSERT INTO `vehiculos` (`id`, `placa`, `modelo`, `marca`, `año`, `estado`, `created`) VALUES
+(1, 'A1A-455', 'I10 ', 'Hyundai', 2013, 'Activo', 'NOW()'),
+(2, 'H1A-664', 'I10 ', 'Hyundai', 2013, 'Activo', 'NOW()'),
+(3, 'H1E-215', 'I10 ', 'Hyundai', 2013, 'Activo', 'NOW()'),
+(4, 'W1B-845', 'I10 ', 'Hyundai', 2013, 'Activo', 'NOW()'),
+(5, 'G1A-104', 'I10 ', 'Hyundai', 2013, 'Activo', 'NOW()');
 
 --
 -- Índices para tablas volcadas
@@ -224,12 +207,6 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
@@ -244,14 +221,6 @@ ALTER TABLE `servicios`
 --
 ALTER TABLE `tiposervicios`
   ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_usuario_rol` (`rol_id`),
-  ADD KEY `fk_usuario_cliente` (`cliente_id`);
 
 --
 -- Indices de la tabla `vehiculos`
@@ -299,13 +268,6 @@ ALTER TABLE `servicios`
   ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
   ADD CONSTRAINT `fk_tiposervicio` FOREIGN KEY (`tiposervicio_id`) REFERENCES `tiposervicios` (`id`),
   ADD CONSTRAINT `fk_vehiculo` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculos` (`id`);
-
---
--- Filtros para la tabla `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `fk_usuario_cliente` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
-  ADD CONSTRAINT `fk_usuario_rol` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
